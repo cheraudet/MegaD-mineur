@@ -11,8 +11,10 @@ package megademineur_heraudet_fougeroux;
  */
 public class Partie {
     Joueur joueur = new Joueur();
+    Grille grilleJeu = new Grille();
     
     public void initialiserPartie(){
+        grilleJeu.viderGrille();
         
     }
     

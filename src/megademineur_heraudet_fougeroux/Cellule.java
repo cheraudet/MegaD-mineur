@@ -14,39 +14,87 @@ public class Cellule {
     boolean drapeau;
     boolean kitDeminage;
     
-    public boolean presenceBombe(){
+    public Cellule(){
+        bombe = false;
+        drapeau = false;
+        kitDeminage = false;
+    }
+    
+    public boolean placerBombe(){
+        if(bombe){
+            return false;
+        }
+        bombe = true;
         return true;
     }
     
-    public boolean presenceKit() {
+    public boolean placerKit() {
+        if(kitDeminage){
+            return false;
+        }
+        kitDeminage = true;
         return true;
     }
     
-    public boolean placerBombe() {
+    public boolean placerDrapeau() {
+        if(drapeau){
+            return false;
+        }
+        drapeau = true;
         return true;
     }
     
-    public boolean placerKit(){
-        return true;
+    public boolean presenceBombe() {
+        return bombe;
     }
     
-    public boolean placerDrapeau(){
-        return true;
+    public boolean presenceKit(){
+        return kitDeminage;
+    }
+    
+    public boolean presenceDrapeau(){
+        return drapeau;
     }
     
     public boolean activerBombe(){
-        return true;
+        if(bombe){
+            bombe = false;
+            return true;
+        }
+        return false;
     }
     
     public boolean activerKit(){
-        return true;
+        if(kitDeminage){
+            kitDeminage = false;
+            if(bombe){
+                bombe = false;
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean recupererKit(){
+        if(presenceKit()){
+            kitDeminage = false;
+            return true;
+        }
+        return false;
     }
     
     public boolean supprimerBombe(){
+        if(bombe == false){
+            return false;
+        }
+        bombe = false;
         return true;
     }
     
     public boolean etreVisible(){
-        return true;
+        if(activerBombe() || activerKit()){
+            return true;
+        }
+        return false;
     }
 }
