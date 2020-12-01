@@ -14,7 +14,4 @@ public class Joueur {
     int pointVie = 3;
     int nbKit;
     
-    public void cliquerCellule(int i, int j){
-        
-    }
 }
