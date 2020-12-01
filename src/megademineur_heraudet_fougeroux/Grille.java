@@ -17,7 +17,8 @@ public class Grille {
     int hauteur = sc.nextInt();
     Cellule cellules [][] = new Cellule [largeur][hauteur];
     
-    public Grille(){
+    public Grille(){ //création du constructeur de la classe Grille
+        //remplissage du tableau cellules[][]
         for(int i=0; i<largeur; i++){
             for(int j=0; j<hauteur; j++){
                 cellules[i][j] = new Cellule();
@@ -25,7 +26,7 @@ public class Grille {
         }
     }
     
-    public void viderGrille(){
+    public void viderGrille(){ //creation methode qui permet de vider la grille et tout réinitialiser
         for (int i=0; i<largeur; i++) {
             for (int j=0; j<hauteur; j++) {
                 cellules[i][j].bombe = false;
@@ -35,7 +36,8 @@ public class Grille {
         }
     }
     
-    public boolean placerBombe(int ligne, int colonne){
+    public boolean placerBombe(int ligne, int colonne){ //creation de la methode qui place les bombes 
+        //test qu'il n'y ait pas deja une bombe avant d'en rajouter une
         if (cellules[ligne][colonne].bombe == false) {
             cellules[ligne][colonne].bombe = true;
             return true;
@@ -43,7 +45,8 @@ public class Grille {
         return false;
     }
     
-    public boolean placerKit(int ligne, int colonne){
+    public boolean placerKit(int ligne, int colonne){ //creation de la methode qui place les kit de deminage 
+        //pareil que pour les bombes il faut verifier avant de placer
         if (cellules[ligne][colonne].kitDeminage == false) {
             cellules[ligne][colonne].kitDeminage = true;
             return true;
@@ -51,7 +54,8 @@ public class Grille {
         return false;
     }
     
-    public boolean placerDrapeau(int ligne, int colonne){
+    public boolean placerDrapeau(int ligne, int colonne){ //creation de la methode qui permet de placer un drapeau
+        //meme chose que pour les deu methodes precedentes
         if (cellules[ligne][colonne].drapeau == false) {
             cellules[ligne][colonne].drapeau = true;
             return true;
@@ -59,18 +63,16 @@ public class Grille {
         return false;
     }
     
-    public void afficherGrilleSurConsole(){
-        for (int i=0; i<largeur; i++) {
+    public void afficherGrilleSurConsole(){ //methode qui affiche la grlle sur la console 
+        for (int i=0; i<largeur; i++) { 
             for (int j=0; j<hauteur; j++) {
-                if(cellules[i][j].bombe){
-                    System.out.print("B");
+                if(demasquerCellule(i,j)==false){
+                    System.out.print("X");
                 }
-                  else if (cellules[i][j].drapeau) {
+                else if(demasquerCellule(i,j)){
+                    demasquerCellule(i,j);
+                }else if(cellules[i][j].drapeau){
                     System.out.print("D");
-                } else if (cellules[i][j].kitDeminage) {
-                    System.out.print("K");
-                } else {
-                    System.out.print("V");
                 }
             }
             System.out.println(" ");
@@ -91,10 +93,23 @@ public class Grille {
     }
     
     public boolean demasquerCellule(int ligne, int colonne){
-        return true;
+        if(cellules[ligne][colonne].bombe){
+            cellules[ligne][colonne].activerBombe();
+            System.out.print("B");
+            return true;
+        } else if(cellules[ligne][colonne].kitDeminage){
+            cellules[ligne][colonne].recupererKit();
+            System.out.print("K");
+            return true;
+        } else if(cellules[ligne][colonne].bombe == false){
+            System.out.print("V");
+            return true;
+        }
+        return false;
     }
     
     public boolean demasquerCelluleVoisine(int ligne, int colonne){
+       
         return true;
     }
 }

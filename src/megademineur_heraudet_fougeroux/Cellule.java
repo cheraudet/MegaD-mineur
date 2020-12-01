@@ -91,10 +91,10 @@ public class Cellule {
         return true;
     }
     
-    public boolean etreVisible(){
+    /*public boolean etreVisible(){
         if(activerBombe() || activerKit()){
             return true;
         }
         return false;
-    }
+    }*/
 }

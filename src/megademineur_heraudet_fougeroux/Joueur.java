@@ -12,6 +12,7 @@ package megademineur_heraudet_fougeroux;
 public class Joueur {
     String Nom;
     int pointVie = 3;
+    int nbKit;
     
     public void cliquerCellule(int i, int j){
         
