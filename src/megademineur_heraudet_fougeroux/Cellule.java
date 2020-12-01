@@ -13,11 +13,13 @@ public class Cellule {
     boolean bombe;
     boolean drapeau;
     boolean kitDeminage;
+    boolean visibilite;
     
     public Cellule(){
         bombe = false;
         drapeau = false;
         kitDeminage = false;
+        visibilite = false;
     }
     
     public boolean placerBombe(){
@@ -91,10 +93,16 @@ public class Cellule {
         return true;
     }
     
-    /*public boolean etreVisible(){
-        if(activerBombe() || activerKit()){
-            return true;
+    public boolean enleverDrapeau(){
+        if(drapeau == false){
+            return false;
         }
+        drapeau = false;
+        return true;
+    }
+    
+    public boolean etreVisible(){
+        
         return false;
-    }*/
+    }
 }

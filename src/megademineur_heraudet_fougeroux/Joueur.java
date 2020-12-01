@@ -11,7 +11,22 @@ package megademineur_heraudet_fougeroux;
  */
 public class Joueur {
     String Nom;
-    int pointVie = 3;
-    int nbKit;
+    int nombreVies = 3;
+    int nombreKit;
     
+    public void obtenirKit(){
+        nombreKit++;
+    }
+    
+    public boolean utiliserKit(){
+        if(nombreKit==0){
+            return false;
+        }
+        nombreKit--;
+        return true;
+    }
+    
+    public void perdrePointsVies(){
+        nombreVies --;
+    }
 }

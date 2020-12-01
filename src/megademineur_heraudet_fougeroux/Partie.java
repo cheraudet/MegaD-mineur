@@ -23,7 +23,7 @@ public class Partie {
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez entrer votre pseudo : ");
         joueur.Nom = sc.nextLine();
-        System.out.println(joueur.Nom+" vous avez "+joueur.pointVie+" points de vie");
+        System.out.println(joueur.Nom+" vous avez "+joueur.nombreVies+" points de vie");
         
         //creation de la grille
         System.out.println("Entrer la taille de la grille souhaitée : ");
@@ -54,12 +54,5 @@ public class Partie {
     public void debuterPartie(){
         
     }
-    
-    public void activationKit(int i, int j){
-        
-    }
-    
-    public void activationBombe(int i, int j){
-        
-    }
+   
 }

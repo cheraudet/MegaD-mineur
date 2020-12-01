@@ -16,6 +16,7 @@ public class Grille {
     int largeur = sc.nextInt();
     int hauteur = sc.nextInt();
     Cellule cellules [][] = new Cellule [largeur][hauteur];
+    int nombreBombesVoisines;
     
     public Grille(){ //création du constructeur de la classe Grille
         //remplissage du tableau cellules[][]
@@ -63,6 +64,22 @@ public class Grille {
         return false;
     }
     
+    public boolean presenceBombe(int ligne, int colonne){
+        return cellules[ligne][colonne].presenceBombe();
+    }
+    
+    public boolean presenceKit(int ligne, int colonne){
+        return cellules[ligne][colonne].presenceKit();
+    }
+    
+    public boolean presenceDrapeau(int ligne, int colonne){
+        return cellules[ligne][colonne].presenceDrapeau();
+    }
+    
+    public boolean activerBombe(int ligne, int colonne){
+        return false;
+    }
+    
     public void afficherGrilleSurConsole(){ //methode qui affiche la grlle sur la console 
         for (int i=0; i<largeur; i++) { 
             for (int j=0; j<hauteur; j++) {
@@ -86,7 +103,7 @@ public class Grille {
     }
     
     public boolean etrePerdantePourJoueur(Joueur j){
-        if(j.pointVie == 0){
+        if(j.nombreVies == 0){
             return true;
         }
         return false;
@@ -103,13 +120,18 @@ public class Grille {
             return true;
         } else if(cellules[ligne][colonne].bombe == false){
             System.out.print("V");
+            demasquerCellulesVoisines(ligne, colonne);
             return true;
         }
         return false;
     }
     
-    public boolean demasquerCelluleVoisine(int ligne, int colonne){
-       
+    public boolean demasquerCellulesVoisines(int ligne, int colonne){
+        
         return true;
+    }
+    
+    public void compterBombesVoisines(int ligne, int colonne){
+        
     }
 }
