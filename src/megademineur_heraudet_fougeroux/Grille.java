@@ -150,24 +150,22 @@ public class Grille {
         return false;
     }
     
-    public boolean demasquerCellulesVoisines(int ligne, int colonne){
-        boolean a=true;
-        if(nombreBombesVoisines==0){
-            demasquerCellule(ligne-1, colonne-1);
-            demasquerCellule(ligne-1, colonne);
-            demasquerCellule(ligne-1, colonne+1);
-            demasquerCellule(ligne, colonne-1);
-            demasquerCellule(ligne, colonne+1);
-            demasquerCellule(ligne+1, colonne-1);
-            demasquerCellule(ligne+1, colonne);
-            demasquerCellule(ligne+1, colonne+1);
-            a = true;
+    public void demasquerCellulesVoisines(int ligne, int colonne){
+        if(cellules[ligne][colonne].bombe==false && cellules[ligne][colonne].visibilite==false){
+            cellules[ligne][colonne].visibilite = true;
+            if(nombreBombesVoisines==0){
+                if(ligne>0 && colonne>0) demasquerCellulesVoisines(ligne-1, colonne-1);
+                if(ligne>0) demasquerCellule(ligne-1, colonne);
+                if(ligne>0 && colonne<(largeur-1)) demasquerCellule(ligne-1, colonne+1);
+                
+                if(colonne>0) demasquerCellule(ligne, colonne-1);
+                if(colonne<(largeur-1)) demasquerCellule(ligne, colonne+1);
+                
+                if(ligne<(hauteur-1) && colonne>0) demasquerCellule(ligne+1, colonne-1);
+                if(ligne<(hauteur-1)) demasquerCellule(ligne+1, colonne);
+                if(ligne<(hauteur-1) && colonne<(largeur-1)) demasquerCellule(ligne+1, colonne+1);
+            }
         }
-        if(nombreBombesVoisines !=0){
-            System.out.print(nombreBombesVoisines);
-            a = false;
-        }
-        return a;
     }
     
     public int compterBombesVoisines(int ligne, int colonne){
