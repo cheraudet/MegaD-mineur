@@ -12,9 +12,8 @@ import java.util.Scanner;
  * @author cheraudet
  */
 public class Grille {
-    Scanner sc = new Scanner(System.in);
-    int largeur = sc.nextInt();
-    int hauteur = sc.nextInt();
+    int largeur;
+    int hauteur;
     Cellule cellules [][] = new Cellule [largeur][hauteur];
     int nombreBombesVoisines;
     
@@ -77,6 +76,21 @@ public class Grille {
     }
     
     public boolean activerBombe(int ligne, int colonne){
+        if(cellules[ligne][colonne].bombe){
+            cellules[ligne][colonne].bombe = false;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean activerKit(int ligne, int colonne){
+        if(cellules[ligne][colonne].kitDeminage){
+            cellules[ligne][colonne].kitDeminage = false;
+            if(cellules[ligne][colonne].bombe){
+                cellules[ligne][colonne].bombe = false;
+            }
+            return true;
+        }
         return false;
     }
     
@@ -98,8 +112,15 @@ public class Grille {
         System.out.print(" ");
     }
     
-    public boolean etreGagnantePourJoueur(Joueur j){
-        return true;
+    public boolean etreGagnantePourJoueur(Joueur joueur){
+        for(int i=0; i<largeur; i++){
+            for(int j=0; j<hauteur; j++){
+                if(joueur.nombreVies!=0 && demasquerCellule(i,j)==true){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     public boolean etrePerdantePourJoueur(Joueur j){
@@ -113,25 +134,55 @@ public class Grille {
         if(cellules[ligne][colonne].bombe){
             cellules[ligne][colonne].activerBombe();
             System.out.print("B");
+            cellules[ligne][colonne].visibilite=true;
             return true;
         } else if(cellules[ligne][colonne].kitDeminage){
             cellules[ligne][colonne].recupererKit();
             System.out.print("K");
+            cellules[ligne][colonne].visibilite=true;
             return true;
         } else if(cellules[ligne][colonne].bombe == false){
             System.out.print("V");
             demasquerCellulesVoisines(ligne, colonne);
+            cellules[ligne][colonne].visibilite=true;
             return true;
         }
         return false;
     }
     
     public boolean demasquerCellulesVoisines(int ligne, int colonne){
-        
-        return true;
+        boolean a=true;
+        if(nombreBombesVoisines==0){
+            demasquerCellule(ligne-1, colonne-1);
+            demasquerCellule(ligne-1, colonne);
+            demasquerCellule(ligne-1, colonne+1);
+            demasquerCellule(ligne, colonne-1);
+            demasquerCellule(ligne, colonne+1);
+            demasquerCellule(ligne+1, colonne-1);
+            demasquerCellule(ligne+1, colonne);
+            demasquerCellule(ligne+1, colonne+1);
+            a = true;
+        }
+        if(nombreBombesVoisines !=0){
+            System.out.print(nombreBombesVoisines);
+            a = false;
+        }
+        return a;
     }
     
-    public void compterBombesVoisines(int ligne, int colonne){
+    public int compterBombesVoisines(int ligne, int colonne){
+        nombreBombesVoisines=0;
+        if(cellules[ligne-1][colonne-1].presenceBombe()) nombreBombesVoisines++;
+        if(cellules[ligne-1][colonne].presenceBombe()) nombreBombesVoisines++;
+        if(cellules[ligne-1][colonne+1].presenceBombe()) nombreBombesVoisines++;
         
+        if(cellules[ligne][colonne-1].presenceBombe()) nombreBombesVoisines++;
+        if(cellules[ligne][colonne+1].presenceBombe()) nombreBombesVoisines++;
+        
+        if(cellules[ligne+1][colonne-1].presenceBombe()) nombreBombesVoisines++;
+        if(cellules[ligne+1][colonne].presenceBombe()) nombreBombesVoisines++;
+        if(cellules[ligne+1][colonne+1].presenceBombe()) nombreBombesVoisines++;
+    
+        return nombreBombesVoisines;
     }
 }

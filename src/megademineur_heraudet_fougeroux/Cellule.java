@@ -102,7 +102,9 @@ public class Cellule {
     }
     
     public boolean etreVisible(){
-        
+        if(visibilite){
+            return true;
+        }
         return false;
     }
 }

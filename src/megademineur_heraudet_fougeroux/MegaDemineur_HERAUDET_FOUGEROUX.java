@@ -15,8 +15,10 @@ public class MegaDemineur_HERAUDET_FOUGEROUX {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Bienvenue dans le MégaDémineur !");
         Partie unePartie = new Partie();
-        unePartie.initialiserPartie();
+        unePartie.debuterPartie();
+        
     }
     
 }
