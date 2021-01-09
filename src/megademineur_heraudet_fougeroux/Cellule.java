@@ -61,6 +61,7 @@ public class Cellule {
     public boolean activerBombe(){
         if(bombe){
             bombe = false;
+            visibilite = true;
             return true;
         }
         return false;
@@ -72,6 +73,7 @@ public class Cellule {
             if(bombe){
                 bombe = false;
             }
+            visibilite = true;
             return true;
         }
         return false;
