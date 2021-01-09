@@ -12,23 +12,23 @@ import java.util.Scanner;
  * @author cheraudet
  */
 public class Grille {
-    int largeur;
-    int hauteur;
-    Cellule cellules [][] = new Cellule [largeur][hauteur];
+    //int largeur;
+    //int hauteur;
+    Cellule cellules [][] = new Cellule [6][7];
     int nombreBombesVoisines;
     
     public Grille(){ //création du constructeur de la classe Grille
         //remplissage du tableau cellules[][]
-        for(int i=0; i<largeur; i++){
-            for(int j=0; j<hauteur; j++){
+        for(int i=0; i<6; i++){
+            for(int j=0; j<7; j++){
                 cellules[i][j] = new Cellule();
             }
         }
     }
     
     public void viderGrille(){ //creation methode qui permet de vider la grille et tout réinitialiser
-        for (int i=0; i<largeur; i++) {
-            for (int j=0; j<hauteur; j++) {
+        for (int i=0; i<6; i++) {
+            for (int j=0; j<7; j++) {
                 cellules[i][j].bombe = false;
                 cellules[i][j].kitDeminage = false;
                 cellules[i][j].drapeau = false;
@@ -95,8 +95,8 @@ public class Grille {
     }
     
     public void afficherGrilleSurConsole(){ //methode qui affiche la grlle sur la console 
-        for (int i=0; i<largeur; i++) { 
-            for (int j=0; j<hauteur; j++) {
+        for (int i=0; i<6; i++) { 
+            for (int j=0; j<7; j++) {
                 if(demasquerCellule(i,j)==false){
                     System.out.print("X");
                 }
@@ -113,8 +113,8 @@ public class Grille {
     }
     
     public boolean etreGagnantePourJoueur(Joueur joueur){
-        for(int i=0; i<largeur; i++){
-            for(int j=0; j<hauteur; j++){
+        for(int i=0; i<6; i++){
+            for(int j=0; j<7; j++){
                 if(joueur.nombreVies!=0 && demasquerCellule(i,j)==true){
                     return true;
                 }
@@ -155,15 +155,15 @@ public class Grille {
             cellules[ligne][colonne].visibilite = true;
             if(nombreBombesVoisines==0){
                 if(ligne>0 && colonne>0) demasquerCellulesVoisines(ligne-1, colonne-1);
-                if(ligne>0) demasquerCellule(ligne-1, colonne);
-                if(ligne>0 && colonne<(largeur-1)) demasquerCellule(ligne-1, colonne+1);
+                if(ligne>0) demasquerCellulesVoisines(ligne-1, colonne);
+                if(ligne>0 && colonne<(6-1)) demasquerCellulesVoisines(ligne-1, colonne+1);
                 
-                if(colonne>0) demasquerCellule(ligne, colonne-1);
-                if(colonne<(largeur-1)) demasquerCellule(ligne, colonne+1);
+                if(colonne>0) demasquerCellulesVoisines(ligne, colonne-1);
+                if(colonne<(6-1)) demasquerCellulesVoisines(ligne, colonne+1);
                 
-                if(ligne<(hauteur-1) && colonne>0) demasquerCellule(ligne+1, colonne-1);
-                if(ligne<(hauteur-1)) demasquerCellule(ligne+1, colonne);
-                if(ligne<(hauteur-1) && colonne<(largeur-1)) demasquerCellule(ligne+1, colonne+1);
+                if(ligne<(7-1) && colonne>0) demasquerCellulesVoisines(ligne+1, colonne-1);
+                if(ligne<(7-1)) demasquerCellulesVoisines(ligne+1, colonne);
+                if(ligne<(7-1) && colonne<(6-1)) demasquerCellulesVoisines(ligne+1, colonne+1);
             }
         }
     }

@@ -25,24 +25,18 @@ public class Partie {
         joueur.Nom = sc.nextLine();
         System.out.println(joueur.Nom+" vous avez "+joueur.nombreVies+" points de vie");
         
-        //creation de la grille
-        System.out.println("Entrer la taille de la grille souhaitée : ");
-        System.out.println("largeur : ");
-        int largeur = sc.nextInt();
-        System.out.println("hauteur : ");
-        int hauteur = sc.nextInt();
         
         //placement des bombes aléatoirement
         Random r = new Random();
         for (int i = 0; i < 5; i++) {
-            int ligneBombe = r.nextInt(largeur);
-            int colonneBombe = r.nextInt(hauteur);
+            int ligneBombe = r.nextInt(6);
+            int colonneBombe = r.nextInt(7);
             grilleJeu.placerBombe(ligneBombe, colonneBombe);
         }
         //placement des kit aléatoirement
         for (int i = 0; i < 5; i++) {
-            int ligneKit = r.nextInt(largeur);
-            int colonneKit = r.nextInt(hauteur);
+            int ligneKit = r.nextInt(6);
+            int colonneKit = r.nextInt(7);
             if(grilleJeu.cellules[ligneKit][colonneKit].presenceKit()==false && grilleJeu.cellules[ligneKit][colonneKit].presenceBombe()==false){
                 grilleJeu.placerKit(ligneKit, colonneKit);
             }
